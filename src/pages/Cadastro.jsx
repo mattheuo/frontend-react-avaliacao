@@ -76,7 +76,6 @@ function Cadastro() {
   return (
     <div className="container">
       <section className="section-header">
-        <p className="eyebrow">Formulário Validado</p>
         <h1>Cadastro de Usuário</h1>
       </section>
 

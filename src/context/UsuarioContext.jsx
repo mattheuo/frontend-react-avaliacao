@@ -23,7 +23,7 @@ export function UsuarioProvider({ children }) {
         const usuariosLocal =
           dadosLocal.status === "fulfilled" ? dadosLocal.value : [];
 
-        setUsuarios([...usuariosApi, ...usuariosLocal]);
+        setUsuarios([...usuariosLocal, ...usuariosApi]);
       } catch (erro) {
         console.error("Erro ao carregar usuários:", erro);
       } finally {
@@ -35,7 +35,7 @@ export function UsuarioProvider({ children }) {
   }, []);
 
   function adicionarUsuario(novoUsuario) {
-    setUsuarios((prev) => [...prev, novoUsuario]);
+    setUsuarios((prev) => [novoUsuario, ...prev]);
   }
 
   return (

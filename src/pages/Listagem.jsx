@@ -17,7 +17,6 @@ function Listagem() {
   return (
     <div className="container">
       <section className="section-header">
-        <p className="eyebrow">Visualização de Dados</p>
         <h1>Lista de Usuários</h1>
       </section>
 

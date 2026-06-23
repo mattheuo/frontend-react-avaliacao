@@ -183,6 +183,8 @@ h2 {
     border-radius: 16px;
     padding: 1.1rem;
     background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .campo {
@@ -263,6 +265,8 @@ h2 {
     margin-bottom: 0.9rem;
     border: 1px solid;
     max-width: 660px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .mensagem-sucesso {
