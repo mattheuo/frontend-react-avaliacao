@@ -1,6 +1,6 @@
 function UserCard({ usuario }) {
   return (
-    <div>
+    <div className="user-card">
       <h3>{usuario.name}</h3>
 
       <p>
