@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UsuarioContext } from "../context/UsuarioContext";
+import { UsuarioContext } from "../context/usuario-context";
 import UserCard from "../components/UserCard";
 
 function Listagem() {
@@ -16,7 +16,10 @@ function Listagem() {
 
   return (
     <div className="container">
-      <h1>Lista de Usuários</h1>
+      <section className="section-header">
+        <p className="eyebrow">Visualização de Dados</p>
+        <h1>Lista de Usuários</h1>
+      </section>
 
       <input
         type="text"
@@ -26,12 +29,15 @@ function Listagem() {
         className="campo-busca"
       />
 
-      {usuariosFiltrados.map((usuario) => (
-        <UserCard
-          key={usuario.id}
-          usuario={usuario}
-        />
-      ))}
+      <section className="list-grid">
+        {usuariosFiltrados.map((usuario) => (
+          <UserCard key={usuario.id} usuario={usuario} />
+        ))}
+      </section>
+
+      {usuariosFiltrados.length === 0 && (
+        <p className="mensagem-erro">Nenhum usuário encontrado para essa busca.</p>
+      )}
     </div>
   );
 }

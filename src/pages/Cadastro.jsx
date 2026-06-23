@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { criarUsuario } from "../services/usuarioSerive";
-import { UsuarioContext } from "../context/UsuarioContext";
+import { UsuarioContext } from "../context/usuario-context";
 
 function Cadastro() {
   const { adicionarUsuario } = useContext(UsuarioContext);
@@ -75,7 +75,10 @@ function Cadastro() {
 
   return (
     <div className="container">
-      <h1>Cadastro de Usuário</h1>
+      <section className="section-header">
+        <p className="eyebrow">Formulário Validado</p>
+        <h1>Cadastro de Usuário</h1>
+      </section>
 
       {mensagem && <p className="mensagem-sucesso">{mensagem}</p>}
       {erro && <p className="mensagem-erro">{erro}</p>}
