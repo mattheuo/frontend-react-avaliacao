@@ -1,8 +1,7 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { buscarUsuarios as buscarUsuariosLocal } from "../services/usuarioSerive";
 import { buscarUsuarios as buscarUsuariosApi } from "../services/api";
-
-export const UsuarioContext = createContext();
+import { UsuarioContext } from "./usuario-context";
 
 export function UsuarioProvider({ children }) {
   const [usuarios, setUsuarios] = useState([]);
@@ -24,7 +23,7 @@ export function UsuarioProvider({ children }) {
         const usuariosLocal =
           dadosLocal.status === "fulfilled" ? dadosLocal.value : [];
 
-        setUsuarios([...usuariosApi, ...usuariosLocal]);
+        setUsuarios([...usuariosLocal, ...usuariosApi]);
       } catch (erro) {
         console.error("Erro ao carregar usuários:", erro);
       } finally {
@@ -36,7 +35,7 @@ export function UsuarioProvider({ children }) {
   }, []);
 
   function adicionarUsuario(novoUsuario) {
-    setUsuarios((prev) => [...prev, novoUsuario]);
+    setUsuarios((prev) => [novoUsuario, ...prev]);
   }
 
   return (
