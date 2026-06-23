@@ -3,41 +3,40 @@ import { buscarUsuarios } from "../services/api";
 import UserCard from "../components/UserCard";
 
 function Listagem() {
-  const [usuarios, setUsuarios] = useState([]);
-  const [loading, setLoading] = useState(true);
+    const [usuarios, setUsuarios] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function carregarUsuarios() {
-      try {
-        const dados = await buscarUsuarios();
-        setUsuarios(dados);
-      } catch (erro) {
-        console.error("Erro:", erro);
-      } finally {
-        setLoading(false);
-      }
+    useEffect(() => {
+        async function carregarUsuarios() {
+            try {
+                const dados = await buscarUsuarios();
+                setUsuarios(dados);
+            } catch (erro) {
+                console.error("Erro:", erro);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        carregarUsuarios();
+    }, []);
+
+    if (loading) {
+        return <h2>Carregando...</h2>;
     }
 
-    carregarUsuarios();
-  }, []);
+    return (
+        <div>
+            <h1>Lista de Usuários</h1>
 
-  if (loading) {
-    return <h2>Carregando...</h2>;
-  }
-
-  return (
-    <div>
-      <h1>Lista de Usuários</h1>
-
-      {usuarios.map((usuario) => (
-        <div key={usuario.id}>
-          <h3>{usuario.name}</h3>
-          <p>Email: {usuario.email}</p>
-          <p>Cidade: {usuario.address.city}</p>
+            {usuarios.map((usuario) => (
+                <UserCard
+                    key={usuario.id}
+                    usuario={usuario}
+                />
+            ))}
         </div>
-      ))}
-    </div>
-  );
+    );
 }
 
 export default Listagem;
