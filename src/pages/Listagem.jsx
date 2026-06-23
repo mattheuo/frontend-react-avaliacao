@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { buscarUsuarios } from "../services/api";
+import UserCard from "../components/UserCard";
 
 function Listagem() {
   const [usuarios, setUsuarios] = useState([]);
