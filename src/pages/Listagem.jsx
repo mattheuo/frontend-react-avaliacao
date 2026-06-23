@@ -1,29 +1,13 @@
-import { useEffect, useState } from "react";
-import { buscarUsuarios } from "../services/api";
+import { useContext, useState } from "react";
+import { UsuarioContext } from "../context/UsuarioContext";
 import UserCard from "../components/UserCard";
 
 function Listagem() {
-  const [usuarios, setUsuarios] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { usuarios, loading } = useContext(UsuarioContext);
   const [busca, setBusca] = useState("");
 
-  useEffect(() => {
-    async function carregarUsuarios() {
-      try {
-        const dados = await buscarUsuarios();
-        setUsuarios(dados);
-      } catch (erro) {
-        console.error("Erro:", erro);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    carregarUsuarios();
-  }, []);
-
   const usuariosFiltrados = usuarios.filter((usuario) =>
-    usuario.name.toLowerCase().includes(busca.toLowerCase())
+    usuario.nome?.toLowerCase().includes(busca.toLowerCase())
   );
 
   if (loading) {

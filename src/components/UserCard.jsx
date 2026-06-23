@@ -1,15 +1,17 @@
 function UserCard({ usuario }) {
   return (
     <div className="user-card">
-      <h3>{usuario.name}</h3>
+      <h3>{usuario.nome}</h3>
 
       <p>
         <strong>Email:</strong> {usuario.email}
       </p>
 
-      <p>
-        <strong>Cidade:</strong> {usuario.address.city}
-      </p>
+      {usuario.telefone && (
+        <p>
+          <strong>Telefone:</strong> {usuario.telefone}
+        </p>
+      )}
     </div>
   );
 }
