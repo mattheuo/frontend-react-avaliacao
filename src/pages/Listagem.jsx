@@ -1,39 +1,10 @@
-import { useEffect, useState } from "react";
-import { buscarUsuarios as buscarUsuariosLocal } from "../services/usuarioSerive";
-import { buscarUsuarios as buscarUsuariosApi } from "../services/api";
+import { useContext, useState } from "react";
+import { UsuarioContext } from "../context/UsuarioContext";
 import UserCard from "../components/UserCard";
 
 function Listagem() {
-  const [usuarios, setUsuarios] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { usuarios, loading } = useContext(UsuarioContext);
   const [busca, setBusca] = useState("");
-
-  useEffect(() => {
-    async function carregarUsuarios() {
-      try {
-        const [dadosApi, dadosLocal] = await Promise.allSettled([
-          buscarUsuariosApi(),
-          buscarUsuariosLocal(),
-        ]);
-
-        const usuariosApi =
-          dadosApi.status === "fulfilled"
-            ? dadosApi.value.map((u) => ({ ...u, nome: u.name }))
-            : [];
-
-        const usuariosLocal =
-          dadosLocal.status === "fulfilled" ? dadosLocal.value : [];
-
-        setUsuarios([...usuariosApi, ...usuariosLocal]);
-      } catch (erro) {
-        console.error("Erro:", erro);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    carregarUsuarios();
-  }, []);
 
   const usuariosFiltrados = usuarios.filter((usuario) =>
     usuario.nome?.toLowerCase().includes(busca.toLowerCase())

@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { criarUsuario } from "../services/usuarioSerive";
+import { UsuarioContext } from "../context/UsuarioContext";
 
 function Cadastro() {
+  const { adicionarUsuario } = useContext(UsuarioContext);
+
   const [form, setForm] = useState({
     nome: "",
     email: "",
@@ -59,7 +62,8 @@ function Cadastro() {
     setErros({});
     setLoading(true);
     try {
-      await criarUsuario(form);
+      const usuarioCriado = await criarUsuario(form);
+      adicionarUsuario(usuarioCriado);
       setMensagem("Cadastro realizado com sucesso!");
       setForm({ nome: "", email: "", usuario: "", telefone: "", senha: "" });
     } catch {
